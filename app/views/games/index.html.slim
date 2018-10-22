@@ -1,1 +1,11 @@
-h1 New Game
+h1
+  = link_to 'New Game', root_path
+
+table id="tic-tac-toe" border="1" cellpadding="50" cellspacing="0"
+  tbody
+    - 3.times do
+      tr
+        - 3.times do
+        td -
+        td -
+        td -

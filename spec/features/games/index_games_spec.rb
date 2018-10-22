@@ -10,6 +10,7 @@ feature 'Show new board', %q{
     visit root_path
 
     expect(page).to have_content "New Game"
+    expect(page).to have_table "tic-tac-toe"
   end
 
 end
