@@ -1,0 +1,107 @@
+$(function() {
+  clearBoard();
+  hideClass();
+  startGame();
+});
+
+function hideClass() {
+  document.getElementById('start_link').classList.add('hidden');
+  document.getElementById('new_link').classList.remove('hidden');
+};
+
+function clearBoard(event) {
+  turn = 0;
+  endGame = false;
+
+  var table = document.getElementById('tic-tac-toe');
+  if (table != null) {
+    for (var i = 0; i < table.rows.length; i++) {
+      for (var j = 0; j < table.rows[i].cells.length; j++)
+        table.rows[i].cells[j].innerHTML = "";
+      }
+    };
+};
+
+var combos = [[0, 1, 2], [3, 4, 5], [6, 7, 8],
+              [0, 3, 6], [1, 4, 7], [2, 5, 8],
+              [0, 4, 8], [2, 4, 6]
+            ];
+
+function startGame() {
+  $('tbody').click(function(event) {
+    if (endGame) {
+      return fasle;
+    }
+    else {
+      nextTurn(event)
+    }
+  });
+};
+
+function nextTurn(event) {
+  updateState(event);
+
+  if(checkWinner()) {
+    message('Player ' + player() + ' Won!');
+    endGame = true;
+  } else if(checkTie(turn)) {
+    message('Tie game');
+    endGame = true;
+  } else {
+    turn += 1;
+  };
+};
+
+var updateState = function(event) {
+  $(event.target).html(player());
+};
+
+function checkWinner() {
+  var tdArr = getMarks()
+  for(i = 0; i < combos.length; i++){
+    if (checkCombo(combos[i], tdArr)){
+      return true;
+    }
+  }
+  return false;
+};
+
+function checkTie(turn) {
+  if (turn === 8) {
+    return true;
+  } else {
+    return false;
+  };
+};
+
+function player() {
+  if (turn % 2 == 0) {
+    return 'X'
+  } else {
+    return 'O'
+  };
+};
+
+function checkCombo(combo, tdArr){
+    if ((tdArr[combo[0]] === 'X') && (tdArr[combo[1]] === 'X') && (tdArr[combo[2]] === 'X')) {
+      return true;
+    } else if ((tdArr[combo[0]] === 'O') && (tdArr[combo[1]] === 'O') && (tdArr[combo[2]] === 'O')) {
+      return true;
+    } else {
+      return false;
+    };
+};
+
+function getMarks() {
+  var marks = []
+
+  $('td').each(function(i) {
+   marks.push($(this).text())
+  })
+
+  return marks;
+};
+
+var message = function(text) {
+  $('#message').html(text);
+}
