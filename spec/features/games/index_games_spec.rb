@@ -9,7 +9,7 @@ feature 'Show new board', %q{
   scenario 'Show a new board' do
     visit root_path
 
-    expect(page).to have_content "New Game"
+    expect(page).to have_content "Start Game"
     expect(page).to have_table "tic-tac-toe"
   end
 

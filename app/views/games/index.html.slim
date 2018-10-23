@@ -1,5 +1,8 @@
-h1
+h1 id='new_link' class='hidden'
   = link_to 'New Game', root_path
+
+h1 id='start_link' 
+  = link_to 'Start Game', start_path, remote: true
 
 table id="tic-tac-toe" border="1" cellpadding="50" cellspacing="0"
   tbody
@@ -9,3 +12,5 @@ table id="tic-tac-toe" border="1" cellpadding="50" cellspacing="0"
         td -
         td -
         td -
+
+h2 id='message'
